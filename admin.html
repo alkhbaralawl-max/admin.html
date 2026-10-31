@@ -12,7 +12,7 @@ input,button,textarea{font-size:16px;padding:10px;border-radius:10px;border:1px 
 input[type=text],input[type=password],input[type=number],textarea{width:100%;margin-bottom:8px;background:#fff;color:#000}
 textarea{min-height:80px}
 button{border:0;background:#6b8e23;color:#fff;font-weight:bold;cursor:pointer;margin:2px}
-button.r{background:#a33}button.b{background:#456}button.y{background:#b8860b}button.on{background:#6b8e23}
+button.r{background:#a33}button.b{background:#456}button.y{background:#b8860b}
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:10px}
 .stat{background:#333;border-radius:12px;padding:10px;text-align:center;font-size:12px}
 .stat b{display:block;font-size:17px;color:#ffd54f;margin-top:2px}
@@ -23,11 +23,8 @@ button.r{background:#a33}button.b{background:#456}button.y{background:#b8860b}bu
 .nf{background:#7f1d1d;color:#fee2e2;border-radius:10px;padding:10px;text-align:center}
 .idbig{font-size:22px;font-weight:bold;color:#ffd54f;text-align:center;letter-spacing:2px;margin:6px 0}
 .balbig{font-size:26px;font-weight:bold;color:#7CFC00;text-align:center;background:#111;border-radius:12px;padding:12px;margin:8px 0}
-.net{border-radius:10px;padding:6px;text-align:center;font-weight:bold;margin:4px 0}
-.net.up{background:#14532d;color:#d1fae5}.net.dn{background:#7f1d1d;color:#fee2e2}.net.eq{background:#444;color:#ddd}
 .line{font-size:13px;line-height:2;border-bottom:1px solid #444}
 .acc{border:1px solid #555;border-radius:12px;padding:10px;margin-bottom:8px;font-size:13px;line-height:1.9}
-.ctrl{background:#1f1f1f;border-radius:10px;padding:8px;margin-top:6px}
 .sec{font-weight:bold;color:#ffd54f;margin:10px 0 6px}
 .hint{font-size:14px;color:#ffd54f;line-height:1.8;margin:8px 0;white-space:pre-line;font-weight:bold}
 .hint.gray{color:#bbb;font-size:12px;font-weight:normal}
@@ -63,10 +60,7 @@ label{display:block;font-size:13px;margin:8px 0 3px}
       <input type="text" id="np" placeholder="كلمة السر (6 أحرف على الأقل)">
       <input type="text" id="nb" inputmode="decimal" placeholder="الرصيد الابتدائي (فاضي = الافتراضي)">
       <button id="mk" style="width:100%">إنشاء</button><div id="mkmsg" class="hint"></div></div>
-    <div class="card"><input type="text" id="q" placeholder="ابحث بالرقم أو الاسم">
-      <div class="chips" id="flt"><button data-f="all" class="on">الكل</button><button data-f="win" class="b">🟢 الرابحين</button><button data-f="lose" class="b">🔴 الخاسرين</button></div>
-      <div id="fsum" class="hint gray"></div>
-      <div id="list"></div></div>
+    <div class="card"><input type="text" id="q" placeholder="ابحث بالرقم أو الاسم"><div id="list"></div></div>
   </div>
   <div id="p4" class="hide"><div class="card"><b>📜 سجل العمليات</b><div id="txlist" style="margin-top:8px"></div></div></div>
   <div id="p5" class="hide"><div class="card" id="f5"></div></div>
@@ -132,7 +126,7 @@ texts:{
 title:"ركن الغرب",
 notice:"⚠️ المراهنات خطر حقيقي على الفرد والمجتمع. هذه تجربة توعوية: الألعاب مضبوطة لصالح المنصة كما في المنصات الحقيقية.",
 banner:"",
-g1:"سلّم الغرب",g2:"قلب العملة",g3:"النرد",img1:"",img2:"",img3:"",
+g1:"سلّم الغرب",g2:"قلب العملة",g3:"النرد",
 lblBal:"الرصيد (وهمي)",lblRounds:"جولات",lblWins:"كسب",lblLoss:"خسر",lblWager:"إجمالي ما راهنت به",lblNet:"خسارتك الصافية",
 msgStart:"اختار لعبة وحط رهانك",msgFirst:"اختار خانة في الصف الأول",msgNext:"كمّل أو اسحب",
 msgLost:"خسرت {amount}",msgWin:"كسبت {amount} 🎉",msgCash:"سحبت {amount}",
@@ -143,7 +137,6 @@ colors:{bg1:"#cfe0ee",bg2:"#e8b25a",card:"#f3e6bd",text:"#3b2a14",btn:"#6b8e23",
 settings:{initial:100000,newZero:false,registration:true,minBet:1,maxBet:0,defBet:1000,rtp:96,rows:6,g1on:true,g2on:true,g3on:true,fx:true}
 };
 const TL={title:"عنوان الموقع",notice:"الرسالة التوعوية (الوحيدة أعلى الشاشة)",banner:"إعلان إضافي (فاضي = مخفي)",g1:"اسم اللعبة 1",g2:"اسم اللعبة 2",g3:"اسم اللعبة 3",
-img1:"رابط صورة اللعبة 1 (يبدأ بـ https، فاضي = الافتراضي)",img2:"رابط صورة اللعبة 2 (فاضي = الافتراضي)",img3:"رابط صورة اللعبة 3 (فاضي = الافتراضي)",
 lblBal:"كلمة: الرصيد",lblRounds:"كلمة: جولات",lblWins:"كلمة: كسب",lblLoss:"كلمة: خسر",lblWager:"كلمة: إجمالي الرهان",lblNet:"كلمة: الخسارة الصافية",
 msgStart:"رسالة البداية",msgFirst:"رسالة أول صف",msgNext:"رسالة كمّل أو اسحب",msgLost:"رسالة الخسارة (كل سطر رسالة، بيظهر واحد عشوائي)",msgWin:"رسالة الكسب",msgCash:"رسالة السحب",
 noBal:"رسالة الرصيد لا يكفي",closedMsg:"رسالة الحساب المغلق",regClosed:"رسالة التسجيل المغلق",
@@ -151,47 +144,28 @@ btnStart:"زر ابدأ",btnCash:"زر اسحب",btnLogin:"زر دخول",btnReg
 phUser:"نص خانة اسم المستخدم",phPass:"نص خانة كلمة السر",phPass2:"نص خانة تأكيد كلمة السر"};
 const BIG=["notice","banner","msgLost"];
 const CL={bg1:"خلفية (أعلى)",bg2:"خلفية (أسفل)",card:"لون البطاقات",text:"لون الكلام",btn:"لون الأزرار",btn2:"لون الأزرار الثانوية",cash:"لون زر السحب",cell:"لون الخانات",act:"لون الخانة النشطة",safe:"لون الخانة الآمنة",trap:"لون الفخ",head:"لون شريط الرسائل"};
-const EF=[["id","الرقم (9 أرقام)"],["balance","الرصيد"],["rounds","عدد الجولات"],["wins","مرات الكسب"],["losses","مرات الخسارة"],["wagered","إجمالي الرهانات"],["returned","إجمالي العائد"],["regBonus","رصيد التسجيل"]];
-let C=JSON.parse(JSON.stringify(DEF)),ALL={},TX=[],curId="",editOpen=false,amtVal="",AM="",page="p1",built=false,started=false,FILT="all";const pending={},OPENC={};
+const EF=[["id","الرقم (9 أرقام)"],["balance","الرصيد"],["rounds","عدد الجولات"],["wins","مرات الكسب"],["losses","مرات الخسارة"],["wagered","إجمالي الرهانات"],["returned","إجمالي العائد"],["regBonus","رصيد التسجيل"],["scale","معامل الفوز % (فاضي = 100)"]];
+let C=JSON.parse(JSON.stringify(DEF)),ALL={},TX=[],curId="",editOpen=false,amtVal="",AM="",page="p1",built=false,started=false;const pending={};
 function merge(c){c=c||{};C={texts:Object.assign({},DEF.texts,c.texts||{}),colors:Object.assign({},DEF.colors,c.colors||{}),settings:Object.assign({},DEF.settings,c.settings||{})};}
 function go(p){page=p;document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("on",x.dataset.p===p));["p1","p2","p3","p4","p5","p6"].forEach(t=>$(t).classList.toggle("hide",t!==p));}
 const findU=id=>Object.entries(ALL).find(([n,u])=>String(u.id)===String(id));
-const netOf=u=>(u.returned||0)-(u.wagered||0);
 
 function fixIds(){
   for(const [n,u] of Object.entries(ALL)){
     if(!u.id&&!pending[n]){pending[n]=1;newId(n).then(id=>DB.ref("users/"+n).update({id:id}));}
   }
 }
-/* التحكم في نسبة خسارة حساب */
-function ctrl(n,u){
-  const d=el("div","ctrl");
-  const cur=u.scale?Math.round(100-u.scale):0;
-  d.appendChild(el("div","hint gray","🎚 نسبة الخسارة الإضافية لهذا الحساب (0 = النسب العادية، حتى 95).\nمثال: 90 = فرصة فوزه بتبقى عُشر الطبيعي فيخسر بسرعة.\nالحالية: "+cur+"%"));
-  const i=el("input");i.type="text";i.inputMode="numeric";i.placeholder="مثال: 90";i.value=cur?String(cur):"";
-  d.appendChild(i);
-  const m=el("div","hint","");
-  btn(d,"💾 طبّق","y",async()=>{
-    const L=pf(i.value);
-    if(!(L>=0&&L<=95))return m.textContent="❌ اكتب رقم من 0 إلى 95";
-    const rf=DB.ref("users/"+n);
-    if(L===0)await rf.child("scale").remove();else await rf.child("scale").set(r2(100-L));
-    m.textContent=L===0?"✅ رجع للنسب العادية":"✅ اتطبّقت: خسارة إضافية "+L+"%";
-  });
-  btn(d,"↩️ رجّع للعادي","b",async()=>{await DB.ref("users/"+n+"/scale").remove();i.value="";m.textContent="✅ رجع للنسب العادية";});
-  d.appendChild(m);return d;
-}
 function dash(){
   const box=$("p1");box.innerHTML="";
-  const list=Object.values(ALL);let W=0,R=0,B=0,op=0,cl=0,ch=0,wd=0,up=0,dn=0;
-  list.forEach(u=>{W+=u.wagered||0;R+=u.returned||0;B+=u.balance||0;u.closed?cl++:op++;const n=netOf(u);if(n>0)up++;else if(n<0)dn++;});
+  const list=Object.values(ALL);let W=0,R=0,B=0,op=0,cl=0,ch=0,wd=0;
+  list.forEach(u=>{W+=u.wagered||0;R+=u.returned||0;B+=u.balance||0;u.closed?cl++:op++;});
   TX.forEach(x=>{if(x.type==="شحن")ch+=x.amt;else if(x.type==="سحب")wd+=x.amt;});
   const p=W-R,g=el("div","grid2");
-  [["الحسابات",list.length],["مفتوحة / مغلقة",op+" / "+cl],["🟢 رابحين",up],["🔴 خاسرين",dn],["إجمالي الرهانات",f(W)],["إجمالي العائد",f(R)],["ربح الموقع (وهمي)",f(p)+" ("+(W?(p/W*100).toFixed(1):"0")+"%)"],["مجموع الأرصدة",f(B)],["المشحون (آخر 200)",f(ch)],["المسحوب (آخر 200)",f(wd)]]
+  [["الحسابات",list.length],["مفتوحة",op],["مغلقة",cl],["إجمالي الرهانات",f(W)],["إجمالي العائد",f(R)],["ربح الموقع (وهمي)",f(p)+" ("+(W?(p/W*100).toFixed(1):"0")+"%)"],["مجموع الأرصدة",f(B)],["المشحون (آخر 200)",f(ch)],["المسحوب (آخر 200)",f(wd)]]
    .forEach(([a,b])=>{const s=el("div","stat",a);s.appendChild(el("b","",String(b)));g.appendChild(s);});
   box.appendChild(g);
   const c=el("div","card");c.appendChild(el("div","sec","أكثر الحسابات خسارة"));
-  const top=Object.entries(ALL).map(([n,u])=>[n,u,-netOf(u)]).sort((a,b)=>b[2]-a[2]).slice(0,5);
+  const top=Object.entries(ALL).map(([n,u])=>[n,u,(u.wagered||0)-(u.returned||0)]).sort((a,b)=>b[2]-a[2]).slice(0,5);
   if(!top.length)c.appendChild(el("div","hint gray","لا توجد حسابات بعد."));
   top.forEach(([n,u,l])=>c.appendChild(el("div","line",n+" ("+(u.id||"—")+") — خسارة صافية: "+f(Math.max(0,l))+" | خسر "+(u.losses||0)+" مرة")));
   box.appendChild(c);
@@ -233,6 +207,8 @@ async function saveEdit(fs){
     const x=pf(fs[k].value);if(!(x>=0))return setMsg("❌ قيمة غلط في: "+k);o[k]=r2(x);
   }
   ["rounds","wins","losses"].forEach(k=>o[k]=Math.floor(o[k]));
+  const sv=nd(fs.scale.value).trim();let scale=null;
+  if(sv!==""){scale=pf(sv);if(!(scale>=1&&scale<=100))return setMsg("❌ معامل الفوز من 1 إلى 100");}
   const npw=fs.pw.value;
   if(npw&&npw.length<6)return setMsg("❌ كلمة السر 6 أحرف على الأقل");
   if(nid!==String(u.id)){
@@ -240,7 +216,7 @@ async function saveEdit(fs){
     if(!t.committed)return setMsg("❌ الرقم ده مستخدم لحساب تاني");
     if(u.id)await DB.ref("ids/"+u.id).remove();
   }
-  o.id=nid;
+  o.id=nid;o.scale=scale;
   if(npw)o.pw=await hash(n,npw);
   await rf.update(o);
   if(o.balance!==r2(u.balance||0))DB.ref("tx").push({t:Date.now(),id:nid,name:n,type:"ضبط",amt:r2(Math.abs(o.balance-(u.balance||0))),after:o.balance});
@@ -272,14 +248,11 @@ function renderAcc(){
   const m=el("div","hint",AM);m.id="amsg";c.appendChild(m);
 
   c.appendChild(el("div","sec","بيانات الحساب"));
-  const net=netOf(u);
-  c.appendChild(el("div","net "+(net>0?"up":net<0?"dn":"eq"),net>0?"🟢 رابح: +"+f(net):net<0?"🔴 خاسر: -"+f(-net):"⚪ متعادل"));
   [["تاريخ التسجيل",fdate(u.created)+" | رصيد التسجيل: "+(u.regBonus!=null?f(u.regBonus):"—")],
    ["كسب / خسر",(u.wins||0)+" مرة / "+(u.losses||0)+" مرة (جولات: "+(u.rounds||0)+")"],
-   ["إجمالي ما راهن به",f(u.wagered||0)+" | إجمالي عائده: "+f(u.returned||0)],
-   ["آخر لعب",fdate(u.last)]]
+   ["إجمالي ما راهن به",f(u.wagered||0)+" | خسارته الصافية: "+f(Math.max(0,(u.wagered||0)-(u.returned||0)))],
+   ["آخر لعب",fdate(u.last)],["معامل الفوز",u.scale?u.scale+"%":"افتراضي (100%)"]]
    .forEach(([a,b])=>c.appendChild(el("div","line",a+": "+b)));
-  c.appendChild(ctrl(n,u));
 
   const act=el("div");act.style.marginTop="10px";
   btn(act,editOpen?"إخفاء التعديل":"✏️ تعديل بيانات الحساب","b",()=>{editOpen=!editOpen;renderAcc();});
@@ -292,12 +265,12 @@ function renderAcc(){
 
   if(editOpen){
     const p=el("div","card");p.style.background="#1f1f1f";
-    p.appendChild(el("div","sec","✏️ تعديل بيانات الحساب"));
+    p.appendChild(el("div","sec","✏️ تعديل كل بيانات الحساب"));
     const fs={};
     EF.forEach(([k,lab])=>{
       p.appendChild(el("label","",lab));
       const i=el("input");i.type="text";i.inputMode=k==="id"?"numeric":"decimal";if(k==="id")i.maxLength=12;
-      i.value=k==="id"?u.id:(u[k]||0);fs[k]=i;p.appendChild(i);
+      i.value=k==="scale"?(u.scale||""):(k==="id"?u.id:(u[k]||0));fs[k]=i;p.appendChild(i);
     });
     p.appendChild(el("label","","كلمة سر جديدة (اتركها فاضية لو مش عايز تغيّرها)"));
     const pw=el("input");pw.type="text";pw.placeholder="كلمة السر الجديدة";fs.pw=pw;p.appendChild(pw);
@@ -319,33 +292,21 @@ function lookup(){
   else{curId="";$("cidmsg").textContent=v.length?"اكتب 9 أرقام ("+v.length+"/9)":"اكتب رقم الحساب لتظهر بياناته ورصيده";}
   renderAcc();
 }
-/* صفحة كل الحسابات */
 function accounts(){
-  const ae=document.activeElement;
-  if(ae&&ae.tagName==="INPUT"&&ae!==$("q")&&$("list").contains(ae))return;
   const q=nd($("q").value).trim().toLowerCase(),box=$("list");box.innerHTML="";
-  let list=Object.entries(ALL).map(([n,u])=>[n,u,netOf(u)]);
-  let w=0,l=0;list.forEach(x=>{if(x[2]>0)w++;else if(x[2]<0)l++;});
-  $("fsum").textContent="الإجمالي: "+list.length+" حساب | 🟢 رابحين: "+w+" | 🔴 خاسرين: "+l;
-  if(FILT==="win")list=list.filter(x=>x[2]>0);else if(FILT==="lose")list=list.filter(x=>x[2]<0);
+  let list=Object.entries(ALL).sort((a,b)=>(b[1].created||0)-(a[1].created||0));
   if(q)list=list.filter(([n,u])=>n.includes(q)||String(u.id||"").includes(q));
-  list.sort((a,b)=>FILT==="lose"?a[2]-b[2]:b[2]-a[2]);
   if(!list.length){box.textContent="مفيش حسابات.";return;}
-  list.forEach(([n,u,net])=>{
+  list.forEach(([n,u])=>{
     const d=el("div","acc");
     d.appendChild(el("div","idbig",String(u.id||"جاري التوليد...")));
-    d.appendChild(el("div","","الاسم: "+n+" — "+(u.closed?"🔴 مغلق":"🟢 مفتوح")+(u.scale?" — 🎚 خسارة إضافية "+Math.round(100-u.scale)+"%":"")));
-    const b=el("div","balbig","💰 الرصيد الحالي: "+f(u.balance||0));b.style.fontSize="20px";b.style.padding="8px";d.appendChild(b);
-    d.appendChild(el("div","net "+(net>0?"up":net<0?"dn":"eq"),net>0?"🟢 رابح: +"+f(net):net<0?"🔴 خاسر: -"+f(-net):"⚪ متعادل"));
+    d.appendChild(el("div","","الاسم: "+n+" — "+(u.closed?"🔴 مغلق":"🟢 مفتوح")));
+    const b=el("div","balbig","💰 الرصيد المتاح: "+f(u.balance||0));b.style.fontSize="18px";b.style.padding="6px";d.appendChild(b);
     [["تسجيل",fdate(u.created)+" | رصيد التسجيل: "+(u.regBonus!=null?f(u.regBonus):"—")],
      ["كسب / خسر",(u.wins||0)+" / "+(u.losses||0)+" | جولات: "+(u.rounds||0)],
-     ["راهن",f(u.wagered||0)+" | عائده: "+f(u.returned||0)],["آخر لعب",fdate(u.last)]]
+     ["راهن",f(u.wagered||0)+" | خسارة صافية: "+f(Math.max(0,(u.wagered||0)-(u.returned||0)))],["آخر لعب",fdate(u.last)]]
      .forEach(([a,b2])=>d.appendChild(el("div","",a+": "+b2)));
-    const row=el("div");
-    if(u.id)btn(row,"💰 شحن/سحب","b",()=>{$("cid").value=u.id;go("p2");lookup();});
-    btn(row,OPENC[n]?"إخفاء التحكم":"🎚 تحكم في الخسارة","y",()=>{OPENC[n]=!OPENC[n];accounts();});
-    d.appendChild(row);
-    if(OPENC[n])d.appendChild(ctrl(n,u));
+    if(u.id)btn(d,"افتح للشحن/السحب","b",()=>{$("cid").value=u.id;go("p2");lookup();});
     box.appendChild(d);
   });
 }
@@ -369,7 +330,7 @@ function txRender(){
 }
 function textsForm(){
   const box=$("f5");box.innerHTML="";
-  box.appendChild(el("div","sec","💬 كل الكلام والصور اللي بتظهر في اللعبة"));
+  box.appendChild(el("div","sec","💬 كل الكلام اللي بيظهر في اللعبة"));
   box.appendChild(el("div","hint gray","تقدر تكتب جوه أي رسالة: {name} اسم اللاعب، {amount} المبلغ، {rounds} الجولات، {losses} الخسارات، {wins} المكاسب، {net} الخسارة الصافية.\nمثال: يا {name} ما تلعبش المراهنات، خسرت {amount} وهي خطر عليك.\nلو سبت الرسالة التوعوية فاضية بترجع للنص الأصلي."));
   const inputs={};
   for(const k in TL){
@@ -377,9 +338,9 @@ function textsForm(){
     const i=el(BIG.includes(k)?"textarea":"input");if(!BIG.includes(k))i.type="text";
     i.value=C.texts[k]||"";inputs[k]=i;box.appendChild(i);
   }
-  btn(box,"💾 احفظ","",async()=>{const o={};for(const k in inputs)o[k]=inputs[k].value;await DB.ref("config/texts").set(o);alert("اتحفظ، وبيظهر للاعبين فورًا");}).style.width="100%";
-  const rb=btn(box,"رجّع الأصلي","r",()=>{});rb.style.width="100%";
-  twoTap(rb,"رجّع الأصلي",async()=>{await DB.ref("config/texts").remove();await sleep(500);textsForm();});
+  btn(box,"💾 احفظ الكلام","",async()=>{const o={};for(const k in inputs)o[k]=inputs[k].value;await DB.ref("config/texts").set(o);alert("اتحفظ، وبيظهر للاعبين فورًا");}).style.width="100%";
+  const rb=btn(box,"رجّع الكلام الأصلي","r",()=>{});rb.style.width="100%";
+  twoTap(rb,"رجّع الكلام الأصلي",async()=>{await DB.ref("config/texts").remove();await sleep(500);textsForm();});
 }
 function settingsForm(){
   const box=$("f6");box.innerHTML="";const S=C.settings;
@@ -421,9 +382,6 @@ $("go").onclick=()=>{
 };
 $("pin").onkeydown=e=>{if(e.key==="Enter")$("go").onclick();};
 $("q").oninput=accounts;$("cid").oninput=lookup;$("mk").onclick=createAcc;
-document.querySelectorAll("#flt button").forEach(b=>b.onclick=()=>{
-  FILT=b.dataset.f;document.querySelectorAll("#flt button").forEach(x=>x.className=x===b?"on":"b");accounts();
-});
 document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>go(b.dataset.p));
 if(sessionStorage.getItem("adm")==="1")enter();
 </script></body></html>
